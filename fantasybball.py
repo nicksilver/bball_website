@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import numpy as np
+import datetime
 
 
 def statspergame(url):
@@ -69,6 +70,7 @@ def injurylist():
     url = 'http://www.rotoworld.com/teams/injuries/nba/all/'
     r = requests.get(url)
     soup = BeautifulSoup(r.text)
+    this_year = str(datetime.datetime.now().year)
 
     # scrape team names
     tables = soup.find_all('table')
@@ -81,7 +83,7 @@ def injurylist():
             player = player.encode('ascii', 'ignore').decode('ascii')
             players.append(player)
             date = guy.findAll('div', class_='date')[0].text
-            date = date.encode('ascii', 'ignore').decode('ascii')
+            date = this_year + date.encode('ascii', 'ignore').decode('ascii')
             dates.append(date)
             stat = guy.findAll('div', class_="impact")[0].text
             stat = stat.encode('ascii', 'ignore').decode('ascii')
@@ -89,7 +91,7 @@ def injurylist():
 
     d = {'Date': dates, 'Player': players, 'Status': status}
     data = pd.DataFrame(d)
-    data['Date'] = pd.to_datetime(data['Date'])
+    data['Date'] = pd.to_datetime(data['Date'], format="%Y%b%d")
 
     # Correct year in dates. This will need to be changed each season.
     pd.options.mode.chained_assignment = None  # default='warn'
