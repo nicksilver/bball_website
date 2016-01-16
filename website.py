@@ -30,7 +30,7 @@ http://opentechschool.github.io/python-flask/extras/databases.html
 @app.before_request  # Runs function before every request from browser
 def before_request():
     # Connect to database
-    g.db = sqlite3.connect("../stats.sqlite")
+    g.db = sqlite3.connect("stats.sqlite")
 
 
 @app.teardown_request  # Closes the database connection after every request
