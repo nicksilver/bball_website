@@ -9,7 +9,7 @@ date = str(date_obj)
 date_long = date_obj.strftime("%B %d %Y")
 injurylist = fb.injurylist()
 
-conn = sqlite3.connect("../stats.sqlite")
+conn = sqlite3.connect("stats.sqlite")
 cur = conn.cursor()
 date_test = cur.execute('''
     SELECT date

@@ -6,7 +6,7 @@ import numpy as np
 
 def statspergame(url):
     r = requests.get(url)
-    soup = BeautifulSoup(r.text)
+    soup = BeautifulSoup(r.text, "lxml")
 
     # scrape team names
     teams = soup.find_all('td', class_='sortableTeamName')
