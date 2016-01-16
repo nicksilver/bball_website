@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>WMCJ 2.0 Extra Stats</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+	<div id="banner">
+		<h1>WMCJ 2.0 Extra Stats</h1>
+		<h2>{{ date }}</h2>
+	</div>
+    <div id="rank">
+        <h3>Team rankings per games played</h3>
+        <table>
+            <tr>
+                <td><b>TEAM</b></td>
+                <td><b>3PM</b></td>
+                <td><b>AST</b></td>
+                <td><b>BLK</b></td>
+                <td><b>FG</b></td>
+                <td><b>FT</b></td>
+                <td><b>PTS</b></td>
+                <td><b>REB</b></td>
+                <td><b>STL</b></td>
+                <td><b>TOTAL</b></td>
+            </tr>
+        {% for rank in rankings %}
+            <tr>
+                {% set i = loop.index-1%}
+                <td>{{ names[i][0] }}</td>
+                <td>{{ rank[0] }}</td>
+                <td>{{ rank[1] }}</td>
+                <td>{{ rank[2] }}</td>
+                <td>{{ rank[3] }}</td>
+                <td>{{ rank[4] }}</td>
+                <td>{{ rank[5] }}</td>
+                <td>{{ rank[6] }}</td>
+                <td>{{ rank[7] }}</td>
+                <td>{{ rank[8] }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+
+	<div id="stats">
+		<h3>Team statistics per games played</h3>
+		<table>
+			<tr>
+				<td><b>TEAM</b></td>
+				<td><b>3PM</b></td>
+				<td><b>AST</b></td>
+				<td><b>BLK</b></td>
+				<td><b>FG</b></td>
+				<td><b>FT</b></td>
+				<td><b>PTS</b></td>
+				<td><b>REB</b></td>
+				<td><b>STL</b></td>
+			</tr>
+		{% for stat in stats %}
+			<tr>
+				{% set i = loop.index-1%}
+				<td>{{ names[i][0] }}</td>
+				<td>{{ stat[0] }}</td>
+				<td>{{ stat[1] }}</td>
+				<td>{{ stat[2] }}</td>
+				<td>{{ stat[3] }}</td>
+				<td>{{ stat[4] }}</td>
+				<td>{{ stat[5] }}</td>
+				<td>{{ stat[6] }}</td>
+				<td>{{ stat[7] }}</td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+
+	<div id="change">
+		<h3>Change in statistics (per game) from previous day</h3>
+		<table>
+			<tr>
+				<td><b>TEAM</b></td>
+				<td><b>3PM</b></td>
+				<td><b>AST</b></td>
+				<td><b>BLK</b></td>
+				<td><b>FG</b></td>
+				<td><b>FT</b></td>
+				<td><b>PTS</b></td>
+				<td><b>REB</b></td>
+				<td><b>STL</b></td>
+				<td><b>TOTAL</b></td>
+			</tr>
+		{% for change in changes %}
+			<tr>
+				{% set i = loop.index-1%}
+				<td>{{ names[i][0] }}</td>
+				<td>{{ change[0] }}</td>
+				<td>{{ change[1] }}</td>
+				<td>{{ change[2] }}</td>
+				<td>{{ change[3] }}</td>
+				<td>{{ change[4] }}</td>
+				<td>{{ change[5] }}</td>
+				<td>{{ change[6] }}</td>
+				<td>{{ change[7] }}</td>
+				<td>{{ change[8] }}</td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+	<div id="injury">
+		<h3>Injury report</h3>
+		{% block content %}
+		{{injuries | safe }}
+		{% endblock %}
+	</div>
+</body>
+</html>
