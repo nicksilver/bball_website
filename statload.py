@@ -11,7 +11,7 @@ url = 'http://games.espn.go.com/fba/standings?leagueId=72928&seasonId=2016'
 date = str(datetime.date.today())
 
 # Connect to sqlite database
-conn = sqlite3.connect('../stats.sqlite')
+conn = sqlite3.connect('stats.sqlite')
 cur = conn.cursor()
 
 # Calculate daily rank and stats per game played
