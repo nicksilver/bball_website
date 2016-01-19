@@ -42,21 +42,21 @@ def teardown_request(exception):
 @app.route('/')  # Routes method to home directory online
 def get_stats():
     # Gets change stats from database and renders to html template
-    # Select team neams
-    names = g.db.execute('''
-        SELECT Teams.name
-        FROM Teams
-        JOIN Pergame_rank
-        ON Teams.id = Pergame_rank.team_id
-        WHERE date_id=18
-        ''').fetchall()
-
     # Get date_id for today's date
     date_id = g.db.execute('''
         SELECT id
         FROM Dates
         WHERE date=?
         ''', (date, )).fetchone()[0]
+
+    # Select team neams
+    names = g.db.execute('''
+        SELECT Teams.name
+        FROM Teams
+        JOIN Pergame_rank
+        ON Teams.id = Pergame_rank.team_id
+        WHERE date_id=?
+        ''', (date_id, )).fetchall()
 
     # Get per game statistics
     stats = g.db.execute('''
