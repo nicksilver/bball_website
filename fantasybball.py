@@ -69,7 +69,7 @@ def statspergame(url):
 def injurylist():
     url = 'http://www.rotoworld.com/teams/injuries/nba/all/'
     r = requests.get(url)
-    soup = BeautifulSoup(r.text)
+    soup = BeautifulSoup(r.text, "lxml")
     this_year = str(datetime.datetime.now().year)
 
     # scrape team names
