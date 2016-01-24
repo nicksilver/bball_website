@@ -60,8 +60,8 @@ def statspergame(url):
     del df_new['GP']
     df_new = np.around(df_new, 2)
 
-    ranks = df_ranks.sort('TOTAL', ascending=False)
-    stats = df_new.sort('TOTAL', ascending=False)
+    ranks = df_ranks.sort_values('TOTAL', ascending=False)
+    stats = df_new.sort_values('TOTAL', ascending=False)
 
     return ranks, stats.drop('TOTAL', 1)
 
@@ -97,4 +97,4 @@ def injurylist():
     pd.options.mode.chained_assignment = None  # default='warn'
     data.Date[data.Date.dt.month > 7] = data.Date[data.Date.dt.month > 7].map(lambda x: x.replace(year=2015))
 
-    return data.sort('Date', ascending=False)
+    return data.sort_values('Date', ascending=False)
