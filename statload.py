@@ -75,15 +75,27 @@ for team in ranks.index:
         total_p = cur.fetchone()[0]
 
         # Calculates change from previous stats
-        thr_c = np.around(THREES_s - thr_p, 2)
-        ast_c = np.around(AST_s - ast_p, 2)
-        blk_c = np.around(BLK_s - blk_p, 2)
-        fg_c = np.around(FG_s - fg_p, 2)
-        ft_c = np.around(FT_s - ft_p, 2)
-        pts_c = np.around(PTS_s - pts_p, 2)
-        reb_c = np.around(REB_s - reb_p, 2)
-        stl_c = np.around(STL_s - stl_p, 2)
-        total_c = np.around(TOTAL - total_p, 2)
+        try:
+            thr_c = np.around(THREES_s - thr_p, 2)
+            ast_c = np.around(AST_s - ast_p, 2)
+            blk_c = np.around(BLK_s - blk_p, 2)
+            fg_c = np.around(FG_s - fg_p, 2)
+            ft_c = np.around(FT_s - ft_p, 2)
+            pts_c = np.around(PTS_s - pts_p, 2)
+            reb_c = np.around(REB_s - reb_p, 2)
+            stl_c = np.around(STL_s - stl_p, 2)
+            total_c = np.around(TOTAL - total_p, 2)
+        except TypeError:
+            print "Data has been corrupted. Setting change values to zero."
+            thr_c = 0
+            ast_c = 0
+            blk_c = 0
+            fg_c = 0
+            ft_c = 0
+            pts_c = 0
+            reb_c = 0
+            stl_c = 0
+            total_c = 0
     else:
         thr_c = 0
         ast_c = 0
